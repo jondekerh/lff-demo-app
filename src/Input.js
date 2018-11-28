@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './assets/css/default.min.css';
-import StarRatingComponent from 'react-star-rating-component';
+import StarRatingComponent from 'react-star-rating-component'; //temp
 const request = require('request');
 
 
-class Output extends Component {
+class Input extends Component {
   render() {
 
     const lffRes = this.props.lffRes;
@@ -34,11 +34,11 @@ class Output extends Component {
     })
 
     return (
-      <div className="output">
+      <div className="Input">
         {pantCells}
       </div>
     )
   }
 };
 
-export default Output;
+export default Input;

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Input from './Input.js';
+import Loading from './Loading.js';
 import Output from './Output.js';
 import './assets/css/default.min.css';
 import ReactLoading from 'react-loading';
@@ -100,21 +102,15 @@ class App extends Component {
           </select><br/>
           <input type='submit' name='sendUserData' id='submitButton'></input>
         </form>
-        {/*the following two statements are for displaying the loading screen while the api call is being made*/}
-        {this.state.isLoading ? <div className='loadingAnimation'>
-                                  <ReactLoading type={'spin'} color={'#0066cc'} height={50} width={50} />
-                                </div> : null}
-        {this.state.isLoading ? <div>
-                                  <p>Getting your personalized matches...</p>
-                                </div> : null}
+        <Loading isLoading={this.state.isLoading}/>
         <Output lffRes={this.state.lffRes}/>
         <button onClick={this.handleReset} id='resetButton' style={{ display: (this.state.isHidden ? '' : 'none')}}>
           Reset
         </button>
         <p id='note'>Note: images and prices displayed here are placeholders. In the integrated app these would be pulled from the retailer database.</p>
       </div>
-    );
+    )
   }
-}
+};
 
 export default App;

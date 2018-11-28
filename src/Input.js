@@ -7,9 +7,9 @@ class Input extends Component {
     return(
       <form id='inputForm' onSubmit={this.props.handleSubmit} style={{ display: (this.props.isHidden ? 'none' : '')}}>
         <p>Enter your measurements here:</p>
-        <input type='text' name='height' placeholder='Height' id='height' onChange={this.handleChange}></input><br/>
-        <input type='text' name='weight' placeholder='Weight' id='weight' onChange={this.handleChange}></input><br/>
-        <input type='text' name='size' placeholder='Size' id='size' onChange={this.handleChange}></input><br/>
+        <input type='text' name='height' placeholder='Height' id='height' onChange={this.props.handleChange}></input><br/>
+        <input type='text' name='weight' placeholder='Weight' id='weight' onChange={this.props.handleChange}></input><br/>
+        <input type='text' name='size' placeholder='Size' id='size' onChange={this.props.handleChange}></input><br/>
         <select name='shape' id='shape' onChange={this.props.handleChange}>
           <option value="" disabled selected>Body Shape</option>
           <option value="0">Rectangle</option>

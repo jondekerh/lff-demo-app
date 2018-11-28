@@ -28,7 +28,15 @@ class App extends Component {
 
   // reset the app for a new search
   handleReset() {
-    this.setState({isHidden: false, isLoading: false, lffRes: []});
+    this.setState({
+      height: 0,
+      weight: 0,
+      size: 0,
+      shape: 0,
+      isHidden: false,
+      isLoading: false,
+      lffRes: []
+    });
     document.getElementById('inputForm').reset();
     document.getElementById('shape').index === 0;
   }
@@ -42,42 +50,49 @@ class App extends Component {
   //sends request to lff api
   handleSubmit(e) {
 
-    e.preventDefault();
+    //if inputs are blank, do nothing
+    if (this.state.height !== 0 && this.state.weight !== 0 && this.state.size !== 0 && this.state.shape !== 0) {
 
-    this.setState({isHidden: true, isLoading: true}, () => {
+                e.preventDefault();
 
-      var payload = {
-        'gender': 1,
-        'height': this.state.height,
-        'weight': this.state.weight,
-        'female_pant_size': this.state.size,
-        'female_reviewer_shape': this.state.shape,
-        'limit': 6
-      }
+                this.setState({isHidden: true, isLoading: true}, () => {
 
-      var options = {
-        url: 'https://api.lookfitfeel.com/items/',
-        method: 'GET',
-        qs: payload,
-        headers: {
-          authorization: auth.key
-        }
-      }
+                  var payload = {
+                    'gender': 1,
+                    'height': this.state.height,
+                    'weight': this.state.weight,
+                    'female_pant_size': this.state.size,
+                    'female_reviewer_shape': this.state.shape,
+                    'limit': 6
+                  }
 
-      request(options, function(err, response, body) {
-        if(err) { console.log(err); return; }
-        console.log("Get response: " + response.statusCode);
-        console.log(response);
+                  var options = {
+                    url: 'https://api.lookfitfeel.com/items/',
+                    method: 'GET',
+                    qs: payload,
+                    headers: {
+                      authorization: auth.key
+                    }
+                  }
 
-        var lffResponse = JSON.parse(response.body);
-        console.log(lffResponse); //mostly for testing, just shows the response data
-        this.setState({lffRes: lffResponse});
-        this.setState({isLoading: false});
-      }.bind(this));
+                  request(options, function(err, response, body) {
+                    if(err) { console.log(err); return; }
+                    console.log("Get response: " + response.statusCode);
+                    console.log(response);
 
-    });
+                    var lffResponse = JSON.parse(response.body);
+                    console.log(lffResponse); //mostly for testing, just shows the response data
+                    this.setState({lffRes: lffResponse});
+                    this.setState({isLoading: false});
+                  }.bind(this));
 
-  }
+                })
+    }
+    //else, send the request
+    else {
+      return;
+    }
+  };
 
   //brief explination of how this rendered HTML works: by default the output (which contains no data at this point)
   //is hidden, along with the loading spinner. When the user submits their query the input fields are similarly

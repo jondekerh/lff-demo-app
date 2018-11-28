@@ -3,7 +3,6 @@ import Input from './Input.js';
 import Loading from './Loading.js';
 import Output from './Output.js';
 import './assets/css/default.min.css';
-import ReactLoading from 'react-loading';
 const request = require('request');
 const auth = require('./auth.json');
 
@@ -31,12 +30,12 @@ class App extends Component {
   handleReset() {
     this.setState({isHidden: false, isLoading: false, lffRes: []});
     document.getElementById('inputForm').reset();
-    document.getElementById('shape').index == 0;
+    document.getElementById('shape').index === 0;
   }
 
   // handles changes to the input fields.
   handleChange(e) {
-      this.setState({[e.target.name]: parseInt(e.target.value)});
+      this.setState({[e.target.name]: parseInt(e.target.value, 10)});
   }
 
 
@@ -88,20 +87,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <form id='inputForm' onSubmit={this.handleSubmit} style={{ display: (this.state.isHidden ? 'none' : '')}}>
-          <p>Enter your measurements here:</p>
-          <input type='text' name='height' placeholder='Height' id='height' onChange={this.handleChange}></input><br/>
-          <input type='text' name='weight' placeholder='Weight' id='weight' onChange={this.handleChange}></input><br/>
-          <input type='text' name='size' placeholder='Size' id='size' onChange={this.handleChange}></input><br/>
-          <select name='shape' id='shape' onChange={this.handleChange}>
-            <option value="" disabled selected>Body Shape</option>
-            <option value="0">Rectangle</option>
-            <option value="1">Hourglass</option>
-            <option value="2">Triangle</option>
-            <option value="3">Circle</option>
-          </select><br/>
-          <input type='submit' name='sendUserData' id='submitButton'></input>
-        </form>
+        <Input isHidden={this.state.isHidden} handleSubmit={this.handleSubmit} handleChange={this.handleChange} />
         <Loading isLoading={this.state.isLoading}/>
         <Output lffRes={this.state.lffRes}/>
         <button onClick={this.handleReset} id='resetButton' style={{ display: (this.state.isHidden ? '' : 'none')}}>

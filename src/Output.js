@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './assets/css/default.min.css';
 import StarRatingComponent from 'react-star-rating-component';
-const request = require('request');
 
 
 class Output extends Component {

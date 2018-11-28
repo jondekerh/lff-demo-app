@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './assets/css/default.min.css';
-import StarRatingComponent from 'react-star-rating-component'; //temp
 import ReactLoading from 'react-loading';
 
 
